@@ -1,0 +1,39 @@
+# NexusJournal 0.1.1
+#
+# A page of the field journal opens the first time a player meets a system: they do something that system
+# is about (open a brewing stand, mine an ore, type one of its commands). The page's one-line tip appears on
+# the action bar, once, and the page is added to their book. Which pages exist, and what opens each one, is
+# in codex.yml (inside the jar). To change them, edit custom-codex.yml next to this file, then /journal reload.
+
+book:
+  # Give every player the journal book the first time they join (once; /journal book gives another).
+  give-on-join: true
+  # Seconds to wait after joining before handing it over, so it does not land in the join spam.
+  delay-seconds: 10
+
+tip:
+  # What the action bar says when a page opens. {title} {tip} {plugin}. & colour codes work.
+  format: "&6✦ &e{title} &7- {tip}"
+  # Two pages found together do not overwrite each other: at most one tip per player per this many seconds.
+  gap-seconds: 4
+  # Also say it in chat (stays in the scroll-back).
+  also-chat: false
+
+nexuspath:
+  # When NexusPath is installed, a page about a system the player hid there never opens and is not listed.
+  respect-hidden: true
+  # Where to read what a player hid: "data" (the player data NexusPath publishes as nexuspath:hidden: the right
+  # choice) or "permission" (the nodes nexuspath.hidden.<plugin>; use it only if you turned off NexusPath's
+  # export.metadata, and never for staff who hold a * wildcard permission: it would read as "hid everything").
+  source: data
+
+menu:
+  # Show a closed "not found yet" tile for pages that nothing a player does can open (only a plugin or
+  # staff running /journal discover can). Off keeps the menu to pages a player can actually earn.
+  show-unreachable: false
+
+messages:
+  prefix: "&6&l[Journal] &r"
+  found: "&6New page in your field journal: &e{title}&6. &7/journal to read it."
+  book: "&7You have a field journal now. Right-click it, or type &f/journal&7."
+  no-book: "&7You already have your journal with you."
